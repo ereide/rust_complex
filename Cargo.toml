@@ -1,5 +1,5 @@
 [package]
-name = "complex"
+name = "rcomplex"
 version = "0.1.0"
 authors = ["Eivind Eide <eivind@vikenfiber.no>"]
 

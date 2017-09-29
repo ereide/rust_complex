@@ -1,5 +1,6 @@
 pub mod complex; 
 
+
 #[cfg(test)]
 mod tests {
 	use super::*;
@@ -65,15 +66,14 @@ mod tests {
 		assert!(actual == expected);	
 
 		
-		let c4 = complex::Complex::new(2, 1);
+		let c4 = complex::Complex::new(3.0, 1.0);
 		
 		let actual = c4.cos();
-		let expected = complex::Complex::new(((c4.real).cos()*(c4.img)*cosh()), (-(c4.real).sin()*(c4.img)*sinh()));
-		assert!(actual == expected);	
-
-		let actual = c4.sin();
-		let expected = complex::Complex::new((c4.real).sin()*(c4.img)*cosh(), -(c4.real).cos()*(c4.img)*sinh());
+		let expected = complex::Complex::new(((c4.real).cos()*(c4.img).cosh()), (-(c4.real).sin()*(c4.img).sinh()));
 		assert!(actual == expected);	
 		
+		let actual = c4.sin();
+		let expected = complex::Complex::new((c4.real).sin()*(c4.img).cosh(), -(c4.real).cos()*(c4.img).sinh());
+		assert!(actual == expected);	
 	}	
 }

@@ -17,6 +17,8 @@ impl Polar {
     }
 }
 
+
+#[derive(Debug)]
 pub struct Complex {
     pub real: f64,
     pub img: f64,
@@ -70,14 +72,18 @@ impl Complex {
     }
 	
 	pub fn cos(&self) -> Complex {
-		(&(self.exp()) + &((-self).exp()))*0.5
-	}
+		Complex {
+            real: (self.real).cos()*(self.img).cosh(),
+            img: -(self.real).sin()*(self.img).sinh(),
+	    }
+    }
 	
 	pub fn sin(&self) -> Complex {
-		(&(self.exp()) - &((-self).exp()))*(-0.5 * Complex::i)
-	}
-	
-	
+        Complex {
+            real: (self.real).sin()*(self.img).cosh(), 
+            img: -(self.real).cos()*(self.img).sinh(),
+        }
+	}	
 }
 
 impl<'a> ops::Neg for &'a Complex {
@@ -113,10 +119,6 @@ impl<'a, 'b> ops::Sub<&'b Complex> for &'a Complex {
 
     fn sub(self, other: &'b Complex) -> Complex {
         self + &(-other)
-		/*Complex { 
-            real: self.real - other.real, 
-            img: self.img - other.img 
-        }*/
     }
 }
 
@@ -165,8 +167,7 @@ impl<'a, 'b> ops::Div<&'b Complex> for &'a Complex {
         Complex { 
             real: x, 
             img: y,
-        }
-		
+        }	
     }
 }
 
