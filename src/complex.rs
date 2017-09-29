@@ -1,6 +1,6 @@
 
 use std::ops;
-
+use std::cmp;
 
 pub struct Polar {
     pub r: f64,
@@ -30,6 +30,15 @@ impl Complex {
         };
         ans
     }
+	
+	pub fn i() -> Complex {
+		Complex {
+			real: 0.0,
+			img: 1.0,
+		}
+	}
+	
+	
 
     pub fn to_polar(&self) -> Polar {
         let r2 = self.modulus();
@@ -59,13 +68,26 @@ impl Complex {
     pub fn modulus(&self) -> f64 {
         self.real * self.real + self.img * self.img
     }
+	
+	pub fn cos(&self) -> Complex {
+		(&(self.exp()) + &((-self).exp()))
+	}
+}
+
+impl<'a> ops::Neg for &'a Complex {
+    type Output = Complex;
+
+    fn neg(self) -> Complex {
+		//TODO: divide by two
+        Complex { real: - self.real, img: -self.img}
+    }
 }
 
 
-impl ops::Add for Complex {
+impl<'a, 'b> ops::Add<&'b Complex> for &'a Complex {
     type Output = Complex;
 
-    fn add(self, other: Complex) -> Complex {
+    fn add(self, other: &'b Complex) -> Complex {
         Complex { 
             real: self.real + other.real, 
             img: self.img + other.img 
@@ -73,39 +95,61 @@ impl ops::Add for Complex {
     }
 }
 
-impl ops::Sub for Complex {
-    type Output = Complex;
-
-    fn sub(self, other: Complex) -> Complex {
-        self + (-other)
+impl cmp::PartialEq for Complex {
+    fn eq(&self, other: & Complex) -> bool {
+        ((self.real == other.real) && (self.img == other.img))
     }
 }
 
-impl ops::Mul for Complex {
+
+/*
+impl<'a, 'b> ops::Mul<&'b T> for &'a Complex {
     type Output = Complex;
 
-    fn mul(self, other: Complex) -> Complex {
-        Complex { real: self.real*other.real - self.img*self.img, img: self.img * other.real + other.img * self.img}
-    }
-}
-
-impl ops::Neg for Complex {
-    type Output = Complex;
-
-    fn neg(self) -> Complex {
-        Complex { real: - self.real, img: -self.img}
-    }
-}
-
-impl ops::Div for Complex {
-    type Output = Complex;
-
-    fn div(self, other: Complex) -> Complex {
-        let den = other.real * other.real + other.img * other.img;
+    fn add(self, other: &'b T) -> Complex {
         Complex { 
-            real: (self.real*other.real + self.img*other.img)/den, 
-            img: (self.img * other.real - self.real * other.img)/den,
+            real: self.real*other, 
+            img: self.img* other, 
         }
+    }
+}
+*/
+impl<'a, 'b> ops::Sub<&'b Complex> for &'a Complex {
+    type Output = Complex;
+
+    fn sub(self, other: &'b Complex) -> Complex {
+        self + &(-other)
+		/*Complex { 
+            real: self.real - other.real, 
+            img: self.img - other.img 
+        }*/
+    }
+}
+
+impl<'a, 'b> ops::Mul<&'b Complex> for &'a Complex {
+    type Output = Complex;
+
+    fn mul(self, other: &'b Complex) -> Complex {
+        Complex {
+			real: self.real*other.real - self.img*other.img, 
+			img: self.img * other.real + self.real * other.img
+		}
+    }
+}
+
+
+impl<'a, 'b> ops::Div<&'b Complex> for &'a Complex {
+    type Output = Complex;
+
+    fn div(self, other: &'b Complex) -> Complex {
+        let den = other.real * other.real + other.img * other.img;
+		let x = (self.real*other.real + self.img*other.img)/den;
+		let y = (self.img * other.real - self.real * other.img)/den;
+        Complex { 
+            real: x, 
+            img: y,
+        }
+		
     }
 }
 
