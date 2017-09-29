@@ -57,8 +57,23 @@ mod tests {
 	#[test]
 	fn functions() {
 		let (c1, c2) = create_complex_pair();
+		let c3 = complex::Complex::i();
+				
+		
 		let actual = c1.conjugate();
 		let expected = complex::Complex::new(c1.real, -c1.img);
-		assert!(actual == expected);		
+		assert!(actual == expected);	
+
+		
+		let c4 = complex::Complex::new(2, 1);
+		
+		let actual = c4.cos();
+		let expected = complex::Complex::new(((c4.real).cos()*(c4.img)*cosh()), (-(c4.real).sin()*(c4.img)*sinh()));
+		assert!(actual == expected);	
+
+		let actual = c4.sin();
+		let expected = complex::Complex::new((c4.real).sin()*(c4.img)*cosh(), -(c4.real).cos()*(c4.img)*sinh());
+		assert!(actual == expected);	
+		
 	}	
 }

@@ -70,8 +70,14 @@ impl Complex {
     }
 	
 	pub fn cos(&self) -> Complex {
-		(&(self.exp()) + &((-self).exp()))
+		(&(self.exp()) + &((-self).exp()))*0.5
 	}
+	
+	pub fn sin(&self) -> Complex {
+		(&(self.exp()) - &((-self).exp()))*(-0.5 * Complex::i)
+	}
+	
+	
 }
 
 impl<'a> ops::Neg for &'a Complex {
@@ -102,18 +108,6 @@ impl cmp::PartialEq for Complex {
 }
 
 
-/*
-impl<'a, 'b> ops::Mul<&'b T> for &'a Complex {
-    type Output = Complex;
-
-    fn add(self, other: &'b T) -> Complex {
-        Complex { 
-            real: self.real*other, 
-            img: self.img* other, 
-        }
-    }
-}
-*/
 impl<'a, 'b> ops::Sub<&'b Complex> for &'a Complex {
     type Output = Complex;
 
@@ -137,6 +131,29 @@ impl<'a, 'b> ops::Mul<&'b Complex> for &'a Complex {
     }
 }
 
+impl<'a> ops::Mul<f64> for &'a Complex {
+    type Output = Complex;
+
+    fn mul(self, other: f64) -> Complex {
+        Complex { 
+            real: self.real*other, 
+            img: self.img* other, 
+        }
+    }
+}
+
+
+
+impl<'a> ops::Div<f64> for &'a Complex {
+    type Output = Complex;
+
+    fn div(self, other: f64) -> Complex {
+        Complex { 
+            real: self.real/other, 
+            img: self.img/other, 
+        }
+    }
+}
 
 impl<'a, 'b> ops::Div<&'b Complex> for &'a Complex {
     type Output = Complex;
