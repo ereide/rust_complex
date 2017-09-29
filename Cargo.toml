@@ -9,11 +9,11 @@ license = "MIT/Apache-2.0"
 
 # Travis CI: `repository` in format "<user>/<project>" is required.
 # `branch` is optional; default is `master`
-travis-ci = { repository = "ereide/rust-complex", branch = "master" }
+travis-ci = { repository = "ereide/rust_complex", branch = "master" }
 
 # Coveralls: `repository` is required. `branch` is optional; default is `master`
 # `service` is optional; valid values are `github` (default) and `bitbucket`.
-coveralls = { repository = "ereide/rust-complex", branch = "master", service = "github" }
+coveralls = { repository = "ereide/rust_complex", branch = "master", service = "github" }
 
 
 [dependencies]
