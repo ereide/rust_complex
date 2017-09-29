@@ -57,8 +57,7 @@ mod tests {
 	
 	#[test]
 	fn functions() {
-		let (c1, c2) = create_complex_pair();
-		let c3 = complex::Complex::i();
+		let (c1, _) = create_complex_pair();
 				
 		
 		let actual = c1.conjugate();
