@@ -2,18 +2,18 @@
 name = "rcomplex"
 version = "0.1.0"
 authors = ["Eivind Eide <eivind@vikenfiber.no>"]
-description = "A simple class for manipulating complex numbers"
+description = "A simple class for manipulating complex numbers."
 license = "MIT/Apache-2.0"
 
 [Badges]
+
+keywords = ["math", "complex"]
+categories = ["Algorithms", "Science"]
 
 # Travis CI: `repository` in format "<user>/<project>" is required.
 # `branch` is optional; default is `master`
 travis-ci = { repository = "ereide/rust_complex", branch = "master" }
 
-# Coveralls: `repository` is required. `branch` is optional; default is `master`
-# `service` is optional; valid values are `github` (default) and `bitbucket`.
-coveralls = { repository = "ereide/rust_complex", branch = "master", service = "github" }
-
+maintenance = { status = "experimental" }
 
 [dependencies]
