@@ -154,7 +154,7 @@ impl<'a> ops::Div<f64> for &'a Complex {
             real: self.real/other, 
             img: self.img/other, 
         }
-    }
+    }   
 }
 
 impl<'a, 'b> ops::Div<&'b Complex> for &'a Complex {
@@ -164,10 +164,11 @@ impl<'a, 'b> ops::Div<&'b Complex> for &'a Complex {
         let den = other.real * other.real + other.img * other.img;
 		let x = (self.real*other.real + self.img*other.img)/den;
 		let y = (self.img * other.real - self.real * other.img)/den;
+
         Complex { 
             real: x, 
             img: y,
-        }	
+        }
     }
 }
 
