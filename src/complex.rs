@@ -2,23 +2,23 @@
 use std::ops;
 use std::cmp;
 
+
 pub struct Polar {
     pub r: f64,
     pub theta: f64,
 }
 
 impl Polar {
-    pub fn to_complex(&self) -> Complex {
-        let com = Complex {
+    pub fn to_complex(self) -> Complex {
+        Complex {
             real: self.r * self.theta.cos(),
             img: self.r * self.theta.sin(),
-        };
-        com
+        }
     }
 }
 
 
-#[derive(Debug)]
+#[derive(Copy, Clone, Debug, Default)]
 pub struct Complex {
     pub real: f64,
     pub img: f64,
@@ -26,11 +26,10 @@ pub struct Complex {
 
 impl Complex {
     pub fn new(real : f64, img: f64) -> Complex{
-        let ans = Complex {
+        Complex {
             real: real, 
             img: img
-        };
-        ans
+        }
     }
 	
 	pub fn i() -> Complex {
@@ -39,8 +38,6 @@ impl Complex {
 			img: 1.0,
 		}
 	}
-	
-	
 
     pub fn to_polar(&self) -> Polar {
         let r2 = self.modulus();
@@ -86,7 +83,7 @@ impl Complex {
 	}	
 }
 
-impl<'a> ops::Neg for &'a Complex {
+impl ops::Neg for Complex {
     type Output = Complex;
 
     fn neg(self) -> Complex {
@@ -96,10 +93,10 @@ impl<'a> ops::Neg for &'a Complex {
 }
 
 
-impl<'a, 'b> ops::Add<&'b Complex> for &'a Complex {
+impl ops::Add< Complex> for Complex {
     type Output = Complex;
 
-    fn add(self, other: &'b Complex) -> Complex {
+    fn add(self, other:  Complex) -> Complex {
         Complex { 
             real: self.real + other.real, 
             img: self.img + other.img 
@@ -108,24 +105,24 @@ impl<'a, 'b> ops::Add<&'b Complex> for &'a Complex {
 }
 
 impl cmp::PartialEq for Complex {
-    fn eq(&self, other: & Complex) -> bool {
-        ((self.real == other.real) && (self.img == other.img))
+    fn eq(&self, other: &Complex) -> bool {
+        ((self.real == other.real) & (self.img == other.img))
     }
 }
 
 
-impl<'a, 'b> ops::Sub<&'b Complex> for &'a Complex {
+impl ops::Sub< Complex> for Complex {
     type Output = Complex;
 
-    fn sub(self, other: &'b Complex) -> Complex {
-        self + &(-other)
+    fn sub(self, other:  Complex) -> Complex {
+        self + (-other)
     }
 }
 
-impl<'a, 'b> ops::Mul<&'b Complex> for &'a Complex {
+impl ops::Mul<Complex> for Complex {
     type Output = Complex;
 
-    fn mul(self, other: &'b Complex) -> Complex {
+    fn mul(self, other: Complex) -> Complex {
         Complex {
 			real: self.real*other.real - self.img*other.img, 
 			img: self.img * other.real + self.real * other.img
@@ -133,7 +130,7 @@ impl<'a, 'b> ops::Mul<&'b Complex> for &'a Complex {
     }
 }
 
-impl<'a> ops::Mul<f64> for &'a Complex {
+impl ops::Mul<f64> for  Complex {
     type Output = Complex;
 
     fn mul(self, other: f64) -> Complex {
@@ -146,7 +143,7 @@ impl<'a> ops::Mul<f64> for &'a Complex {
 
 
 
-impl<'a> ops::Div<f64> for &'a Complex {
+impl ops::Div<f64> for  Complex {
     type Output = Complex;
 
     fn div(self, other: f64) -> Complex {
@@ -157,10 +154,10 @@ impl<'a> ops::Div<f64> for &'a Complex {
     }   
 }
 
-impl<'a, 'b> ops::Div<&'b Complex> for &'a Complex {
+impl ops::Div< Complex> for  Complex {
     type Output = Complex;
 
-    fn div(self, other: &'b Complex) -> Complex {
+    fn div(self, other:  Complex) -> Complex {
         let den = other.real * other.real + other.img * other.img;
 		let x = (self.real*other.real + self.img*other.img)/den;
 		let y = (self.img * other.real - self.real * other.img)/den;

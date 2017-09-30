@@ -38,19 +38,19 @@ mod tests {
     fn arithmetic() {
 		let (c1, c2) = create_complex_pair();
 		
-		let actual = &c1 + &c2;
+		let actual = c1 + c2;
 		let expected = complex::Complex::new(4.0, 7.0);
 		assert!(actual == expected);
 
-		let actual = &c1 - &c2;
+		let actual = c1 - c2;
 		let expected = complex::Complex::new(-2.0, 3.0);
 		assert!(actual == expected);		
 
-		let actual = &c1 * &c2;
+		let actual = c1 * c2;
 		let expected = complex::Complex::new(-7.0, 17.0);
 		assert!(actual == expected);		
 
-		let actual = &c1 / &c2;
+		let actual = c1 / c2;
 		let expected = complex::Complex::new(1.0, 1.0);
 		assert!(actual == expected);			
     }

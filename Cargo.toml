@@ -1,12 +1,12 @@
 [package]
 name = "rcomplex"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Eivind Eide <eivind@vikenfiber.no>"]
-description = "A simple class for manipulating complex numbers."
+description = "A simple class for manipulating complex numbers. This project is mainly for educational purposes, and I reccomend using other more complete packages for complex math."
 license = "MIT/Apache-2.0"
 
 keywords = ["math", "complex"]
-categories = ["Algorithms", "Science"]
+categories = ["algorithms", "science"]
 
 [badges]
 travis-ci = { repository = "ereide/rust_complex", branch = "master" }
