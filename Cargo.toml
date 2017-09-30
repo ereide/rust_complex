@@ -1,6 +1,6 @@
 [package]
 name = "rcomplex"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Eivind Eide <eivind@vikenfiber.no>"]
 description = "A simple class for manipulating complex numbers."
 license = "MIT/Apache-2.0"
